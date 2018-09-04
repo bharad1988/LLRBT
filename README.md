@@ -1,5 +1,5 @@
 # LLRBT
-## Left leaning red black tree [1]
+### A generic c++ template to build Left leaning red black tree [1]
 *** As of now adding nodes and printing it inorder is supported. Further support will be added soon along with more refinements. ***
 
 The project aims to build a template for self balanced tree based on Robert Sedgewick's (princeton university) left leaning red black tree.
