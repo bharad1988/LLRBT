@@ -2,7 +2,7 @@
 #include "rbt.h"
 using namespace std;
 
-
+// A sample program to demonstrate the use fof left leaning-RBT template
 // Start with a BST 
 // Then add DS to make it RBT ( LLRBT )
 // Then go on adding the rotate
@@ -17,6 +17,7 @@ class Node : public RBTNode<Node> {
         Node(int i){
             data = i;
         }
+        // overload relational operator 
         bool operator < (const Node &n2){
             return data < n2.data;
         }
@@ -35,8 +36,11 @@ class Node : public RBTNode<Node> {
             return output;
         }
 };
+
 int main(){
+    // test input
     Node a(3),b(2),c(1),d(4),e(6);
+    // initialize RBTree template of type Node
     RBTree <Node> tree;
     tree.addNode(&a);
     tree.addNode(&b);
