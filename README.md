@@ -10,6 +10,7 @@ How does it work?
 The template provides a way to arrange any given set of nodes in a balanced tree structure. 
 As such the template doesn't take any extra space apart from a few tree attributes. The user class/DS has to allocate memory and add the node to be a part of the tree. 
 Although there is a need for the user class to overload the operators so that the tree is arranged based on the user class key.
+
 Reference:
 [1]: https://www.cs.princeton.edu/~rs/talks/LLRB/LLRB.pdf 
 
