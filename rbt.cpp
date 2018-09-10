@@ -1,6 +1,5 @@
 #include <iostream>
 #include "rbt.h"
-using namespace std;
 
 // A sample program to demonstrate the use fof left leaning-RBT template
 // Start with a BST 
@@ -32,7 +31,7 @@ class Node : public RBTNode<Node> {
             return data == n2.data;
         }
         friend std::ostream& operator<<( std::ostream &output,const Node &n1){
-            output<<n1.data<<endl;
+            output<<n1.data<<std::endl;
             return output;
         }
 };
@@ -56,7 +55,11 @@ int main(){
         tree.addNode(f);
     }
     tree.printTree();
-    cout<<tree.count<<endl;
-    cout<<tree.repeat<<endl;
-
+    bool res = tree.searchTree(&a);
+    std::cout<<res;
+    Node n(30);
+    res = tree.searchTree(&n);
+    std::cout<<res;
+    std::cout<<tree.count<<std::endl;
+    std::cout<<tree.repeat<<std::endl;
 }

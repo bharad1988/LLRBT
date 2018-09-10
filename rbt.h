@@ -46,6 +46,10 @@ class RBTree {
                 head = addNode(head,a);
             }
         }
+
+        bool searchTree(T *a){
+            return searchTree(head,a);
+        }
         void deleteNode(){
         }
         void printTree(){
@@ -123,6 +127,26 @@ class RBTree {
             return t; 
 
         }
+
+        bool searchTree(T *t,T *a){
+            if (*a == *t){
+                return true;
+            }
+            if ( *a < *t){
+                if (t->left){
+                    searchTree(t->left,a);
+                }
+                else
+                    return false;
+            }
+            else if ( *a > *t){
+                if (t->right){
+                    searchTree(t->right,a);
+                }else return false;
+            }
+        }
+
+
         void printTree(T *head){
             if (head->left){
                 printTree(head->left);
