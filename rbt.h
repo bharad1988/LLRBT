@@ -50,7 +50,8 @@ class RBTree {
         bool searchTree(T *a){
             return searchTree(head,a);
         }
-        void deleteNode(){
+        void deleteNode(T *a){
+            deleteNode(head,a);
         }
         void printTree(){
             printTree(head);
@@ -92,11 +93,16 @@ class RBTree {
             if (!a)return false;
             else return a->color;
         }
+
+
         T* addNode(T *t,T *a){
             // if head is null , set pointer to head of the tree;
             if (!t){
                 t  = a;
                 return t;
+            }
+            if (isRed((t)->left) && isRed((t)->right)){
+                colorFlip(t);
             }
             // build a binary tree
             // Element exists, no need to add
@@ -121,19 +127,18 @@ class RBTree {
             if (isRed((t)->left) && isRed((t)->left->left)){
                 t = rightRotate(t);
             }
-            if (isRed((t)->left) && isRed((t)->right)){
-                colorFlip(t);
-            }
             return t; 
 
         }
 
         bool searchTree(T *t,T *a){
             if (*a == *t){
+                std::cout<<"found\n";
                 return true;
             }
             if ( *a < *t){
                 if (t->left){
+                    std::cout<<"go left\n";
                     searchTree(t->left,a);
                 }
                 else
@@ -141,12 +146,14 @@ class RBTree {
             }
             else if ( *a > *t){
                 if (t->right){
+                    std::cout<<"go right\n";
                     searchTree(t->right,a);
                 }else return false;
             }
         }
 
-
+        void deleteNode(T *t,T *a){
+        }
         void printTree(T *head){
             if (head->left){
                 printTree(head->left);

@@ -38,28 +38,36 @@ class Node : public RBTNode<Node> {
 
 int main(){
     // test input
-    Node a(3),b(2),c(1),d(4),e(6);
+    /*
+    Node a(3),b(2),c(1),d(4),e(6);*/
     // initialize RBTree template of type Node
     RBTree <Node> tree;
+    /*
     tree.addNode(&a);
     tree.addNode(&b);
     tree.addNode(&c);
     tree.addNode(&d);
     tree.addNode(&e);
-    for (int i=0;i<10;i++){
+    */
+    int total;
+    std::cout<<"Entger the number of elements in the tree\n";
+    std::cin>>total;
+    for (int i=1;i<=total;i++){
         Node *f=new Node(i);
         tree.addNode(f);
     }
+    /*
     for (int i=20;i>10;i--){
         Node *f=new Node(i);
         tree.addNode(f);
-    }
+    }*/
     tree.printTree();
+    std::cout<<"Enter the value to be found\n";
+    int val;
+    std::cin>>val;
+    Node a(val);
     bool res = tree.searchTree(&a);
     std::cout<<res;
-    Node n(30);
-    res = tree.searchTree(&n);
-    std::cout<<res;
-    std::cout<<tree.count<<std::endl;
-    std::cout<<tree.repeat<<std::endl;
+    //std::cout<<tree.count<<std::endl;
+    //std::cout<<tree.repeat<<std::endl;
 }
