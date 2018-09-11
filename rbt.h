@@ -36,7 +36,7 @@ class RBTree {
         // operations over a tree
         void addNode(T *a){
             count = count +1;
-            std::cout<<count<<std::endl;
+            //std::cout<<count<<std::endl;
 
             if (!head) {
                 head = a;
@@ -45,6 +45,7 @@ class RBTree {
             else {
                 head = addNode(head,a);
             }
+            std::cout<<head->color;
         }
 
         bool searchTree(T *a){
@@ -82,11 +83,12 @@ class RBTree {
             return *x;
         }
         // flip color
-        void colorFlip(T *a){
-            if (a != head ) a->color = !(a->color);
+        T* colorFlip(T *a){
+            a->color = !(a->color); 
             a->left->color = !a->left->color;
             a->right->color = !a->right->color;
             std::cout<<"flip colors \n";
+            return a;
         }
 
         bool isRed(T *a){
@@ -100,10 +102,10 @@ class RBTree {
             if (!t){
                 t  = a;
                 return t;
-            }
+            }/*
             if (isRed((t)->left) && isRed((t)->right)){
-                colorFlip(t);
-            }
+                t = colorFlip(t);
+            }*/
             // build a binary tree
             // Element exists, no need to add
             // duplicate elements are not supported as of now
@@ -127,12 +129,17 @@ class RBTree {
             if (isRed((t)->left) && isRed((t)->left->left)){
                 t = rightRotate(t);
             }
+            if (isRed((t)->left) && isRed((t)->right)){
+                t = colorFlip(t);
+                
+            }
             return t; 
 
         }
 
         bool searchTree(T *t,T *a){
             if (*a == *t){
+                std::cout<<"\ncolour\t"<<t->color<<"\n";
                 std::cout<<"found\n";
                 return true;
             }
