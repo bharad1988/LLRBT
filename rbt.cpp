@@ -80,10 +80,10 @@ int main(){
         std::cout<<res;
     }*/
     while (true){
-    int option;
-    std::cout<<"Enter an option\n";
-    std::cout<<"1. to insert : \n2. to search\n-1. to exit\n";
-    std::cin>>option;
+        int option;
+        std::cout<<"Enter an option\n";
+        std::cout<<"1. to insert : \n2. to search\n3. to deleteMin \n4. to deleteMax \n5. to print \n-1. to exit\n";
+        std::cin>>option;
         switch(option)
         {
             case 1:
@@ -105,6 +105,21 @@ int main(){
                 Node *z = new Node(val);
                 bool res = tree.searchTree(z);
                 std::cout<<res;
+                }
+                break;
+            case 3:
+                {
+                    tree.deleteMin();
+                }
+                break;
+            case 4:
+                {
+                    tree.deleteMax();
+                }
+                break;
+            case 5:
+                {
+                    tree.printTree();
                 }
                 break;
             case -1 :

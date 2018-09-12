@@ -40,7 +40,6 @@ class RBTree {
 
             if (!head) {
                 head = a;
-                head->color = BLACK;
             }
             else {
                 head = addNode(head,a);
@@ -51,15 +50,65 @@ class RBTree {
         bool searchTree(T *a){
             return searchTree(head,a);
         }
+        void deleteMax(){
+            if (head) head = deleteMax(head);
+            else std::cout<<"Tree already empty\n";
+            if (head) head->color = BLACK;
+        }
+
+        void deleteMin(){
+            if(head) head = deleteMin(head);
+            else std::cout<<"Tree already empty\n";
+            if (head) head->color = BLACK;
+        }
         void deleteNode(T *a){
             deleteNode(head,a);
         }
         void printTree(){
-            printTree(head);
+            if (head)printTree(head);
+            else std::cout<<"Tree is empty\n";
         }
         
 
     private:
+        // Helper for delete
+        T* fixUp(T *t){
+            if (!t){
+                return t;
+            }
+            if (isRed(t->right)){
+                t = leftRotate(t);
+            } 
+            if (isRed((t)->left) && isRed((t)->left->left)){
+                t = rightRotate(t);
+            }
+            if (isRed((t)->left) && isRed((t)->right)){
+                t = colorFlip(t);
+            }
+            return t;
+
+        }
+        // Helper 2. for  delete
+        // Rotate red links to the right
+        T* moveRedRight(T *t){
+            colorFlip(t);
+            if (isRed(t->left->left)){
+                t = rightRotate(t);
+                colorFlip(t);
+            }
+            return t;
+        }
+
+        // Helper 3 for deleteMin
+        T* moveRedLeft(T *t){
+            colorFlip(t);
+            if (isRed(t->right->left)){
+                t = leftRotate(t);
+                colorFlip(t);
+            }
+            return t;
+        }
+
         // Left rotate
         T* leftRotate(T *a){
             T **x;
@@ -157,6 +206,29 @@ class RBTree {
                     searchTree(t->right,a);
                 }else return false;
             }
+        }
+        T* deleteMax(T *t){
+            if (isRed(t->left))
+                t = rightRotate(t);
+            if (!t->right ){
+                free(t);
+                return NULL;
+            }
+            if (!isRed(t->right) && !isRed(t->right->left))
+                t = moveRedRight(t);
+            t->right  = deleteMax(t->right);
+            return fixUp(t);
+
+        }
+        T* deleteMin(T *t){
+            if (!t->left ){
+                free(t);
+                return NULL;
+            }
+            if (!isRed(t->left) && !isRed(t->left->left))
+                t = moveRedLeft(t);
+            t->left  = deleteMin(t->left);
+            return fixUp(t);
         }
 
         void deleteNode(T *t,T *a){
